@@ -57,26 +57,21 @@
 
             <div class="section">
                 <h3>Portfolio</h3>
-                <div class="document-upload" id="portfolio-upload">
-                    <div class="upload-area">
-                        <span class="upload-icon">🎨</span>
-                        <p>Upload your portfolio</p>
-                        <input type="file" id="portfolio-file" accept=".pdf,.doc,.docx,.txt" hidden>
-                        <button class="upload-btn" id="portfolio-upload-btn">
-                            Choose File
-                        </button>
+                <div class="portfolio-section">
+                    <div class="portfolio-input">
+                        <label for="portfolio-url">Portfolio URL</label>
+                        <input type="url" id="portfolio-url" placeholder="https://your-portfolio.com or https://github.com/yourusername" />
+                        <button id="save-portfolio-btn" class="save-btn">Save</button>
                     </div>
-                    <div class="document-info" id="portfolio-info" style="display: none;">
-                        <div class="doc-preview">
-                            <span class="doc-icon">🎨</span>
-                            <div class="doc-details">
-                                <h4 id="portfolio-name">Portfolio.pdf</h4>
-                                <p id="portfolio-date">Last updated: Today</p>
+                    <div class="portfolio-info" id="portfolio-info" style="display: none;">
+                        <div class="portfolio-preview">
+                            <span class="portfolio-icon">🎨</span>
+                            <div class="portfolio-details">
+                                <h4 id="portfolio-name">Portfolio Link</h4>
+                                <p id="portfolio-url-display">https://your-portfolio.com</p>
                             </div>
                         </div>
-                        <button class="replace-btn" id="portfolio-replace-btn">
-                            Replace
-                        </button>
+                        <button class="edit-btn" id="portfolio-edit-btn">Edit</button>
                     </div>
                 </div>
             </div>

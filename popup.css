@@ -671,4 +671,107 @@ body {
 .tab-content::-webkit-scrollbar-thumb:hover,
 .modal-body::-webkit-scrollbar-thumb:hover {
     background: #a8a8a8;
+}
+
+/* Portfolio Section */
+.portfolio-section {
+    border: 2px dashed #dee2e6;
+    border-radius: 8px;
+    padding: 20px;
+    transition: all 0.2s ease;
+}
+
+.portfolio-section:hover {
+    border-color: #667eea;
+    background: #f8f9ff;
+}
+
+.portfolio-input {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.portfolio-input label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #495057;
+    margin-bottom: 4px;
+}
+
+.portfolio-input input {
+    padding: 12px;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.2s ease;
+}
+
+.portfolio-input input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.save-btn {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    align-self: flex-start;
+}
+
+.save-btn:hover {
+    background: #218838;
+}
+
+.portfolio-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    background: #f8f9fa;
+    border-radius: 6px;
+}
+
+.portfolio-preview {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.portfolio-icon {
+    font-size: 24px;
+}
+
+.portfolio-details h4 {
+    margin: 0 0 4px 0;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.portfolio-details p {
+    margin: 0;
+    font-size: 12px;
+    color: #6c757d;
+    word-break: break-all;
+}
+
+.edit-btn {
+    background: #6c757d;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 11px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.edit-btn:hover {
+    background: #5a6268;
 } 

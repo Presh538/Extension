@@ -15,6 +15,7 @@ class PopupManager {
     this.setupEventListeners();
     await this.loadData();
     this.renderUI();
+    this.renderPortfolio();
   }
 
   setupEventListeners() {
@@ -25,26 +26,30 @@ class PopupManager {
       });
     });
 
-    // File uploads - Resume
+    // File uploads - Resume (with focus preservation)
     document.getElementById('resume-file').addEventListener('change', (e) => {
       this.handleFileUpload(e, 'resume');
     });
-    document.getElementById('resume-upload-btn').addEventListener('click', () => {
+    document.getElementById('resume-upload-btn').addEventListener('click', (e) => {
+      e.preventDefault(); // Prevent popup from closing
       document.getElementById('resume-file').click();
     });
-    document.getElementById('resume-replace-btn').addEventListener('click', () => {
+    document.getElementById('resume-replace-btn').addEventListener('click', (e) => {
+      e.preventDefault(); // Prevent popup from closing
       document.getElementById('resume-file').click();
     });
 
-    // File uploads - Portfolio
-    document.getElementById('portfolio-file').addEventListener('change', (e) => {
-      this.handleFileUpload(e, 'portfolio');
+    // Portfolio URL management
+    document.getElementById('save-portfolio-btn').addEventListener('click', () => {
+      this.savePortfolio();
     });
-    document.getElementById('portfolio-upload-btn').addEventListener('click', () => {
-      document.getElementById('portfolio-file').click();
+    document.getElementById('portfolio-edit-btn').addEventListener('click', () => {
+      this.editPortfolio();
     });
-    document.getElementById('portfolio-replace-btn').addEventListener('click', () => {
-      document.getElementById('portfolio-file').click();
+    document.getElementById('portfolio-url').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        this.savePortfolio();
+      }
     });
 
     // Skills management
@@ -175,23 +180,6 @@ class PopupManager {
     } else {
       document.getElementById('resume-upload').querySelector('.upload-area').style.display = 'flex';
       document.getElementById('resume-info').style.display = 'none';
-    }
-
-    // Portfolio
-    if (this.documents.portfolio) {
-      document.getElementById('portfolio-upload').querySelector('.upload-area').style.display = 'none';
-      document.getElementById('portfolio-info').style.display = 'flex';
-      document.getElementById('portfolio-name').textContent = this.documents.portfolio.filename;
-      document.getElementById('portfolio-date').textContent = `Last updated: ${this.formatDate(this.documents.portfolio.lastUpdated)}`;
-      
-      // Add file type indicator
-      const portfolioName = document.getElementById('portfolio-name');
-      if (this.documents.portfolio.content && typeof this.documents.portfolio.content === 'object') {
-        portfolioName.textContent = `${this.documents.portfolio.filename} (${this.documents.portfolio.content.type || 'file'})`;
-      }
-    } else {
-      document.getElementById('portfolio-upload').querySelector('.upload-area').style.display = 'flex';
-      document.getElementById('portfolio-info').style.display = 'none';
     }
   }
 
@@ -672,6 +660,61 @@ class PopupManager {
     if (diffDays <= 7) return `${diffDays - 1} days ago`;
     
     return date.toLocaleDateString();
+  }
+
+  savePortfolio() {
+    const url = document.getElementById('portfolio-url').value.trim();
+    
+    if (!url) {
+      this.showNotification('Please enter a portfolio URL', 'error');
+      return;
+    }
+
+    // Basic URL validation
+    try {
+      new URL(url);
+    } catch {
+      this.showNotification('Please enter a valid URL', 'error');
+      return;
+    }
+
+    // Save to storage
+    chrome.storage.local.set({ portfolio: { url, name: 'Portfolio Link' } }, () => {
+      this.showNotification('Portfolio saved successfully!', 'success');
+      this.renderPortfolio();
+    });
+  }
+
+  editPortfolio() {
+    // Show input form
+    document.querySelector('.portfolio-input').style.display = 'flex';
+    document.getElementById('portfolio-info').style.display = 'none';
+    
+    // Load current URL
+    chrome.storage.local.get(['portfolio'], (result) => {
+      if (result.portfolio) {
+        document.getElementById('portfolio-url').value = result.portfolio.url;
+      }
+    });
+  }
+
+  renderPortfolio() {
+    chrome.storage.local.get(['portfolio'], (result) => {
+      const portfolio = result.portfolio;
+      
+      if (portfolio) {
+        // Show portfolio info
+        document.querySelector('.portfolio-input').style.display = 'none';
+        document.getElementById('portfolio-info').style.display = 'flex';
+        
+        document.getElementById('portfolio-name').textContent = portfolio.name;
+        document.getElementById('portfolio-url-display').textContent = portfolio.url;
+      } else {
+        // Show input form
+        document.querySelector('.portfolio-input').style.display = 'flex';
+        document.getElementById('portfolio-info').style.display = 'none';
+      }
+    });
   }
 }
 
