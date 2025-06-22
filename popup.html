@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Application Assistant</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="popup-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                <span class="logo-icon">🤖</span>
+                <h1>Job Assistant</h1>
+            </div>
+            <div class="status-indicator" id="status-indicator">
+                <span class="status-dot"></span>
+                <span class="status-text">Ready</span>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="nav-tabs">
+            <button class="tab-btn active" data-tab="documents">📄 Documents</button>
+            <button class="tab-btn" data-tab="analysis">📊 Analysis</button>
+            <button class="tab-btn" data-tab="settings">⚙️ Settings</button>
+        </div>
+
+        <!-- Documents Tab -->
+        <div class="tab-content active" id="documents-tab">
+            <div class="section">
+                <h3>Resume</h3>
+                <div class="document-upload" id="resume-upload">
+                    <div class="upload-area">
+                        <span class="upload-icon">📄</span>
+                        <p>Upload your resume</p>
+                        <input type="file" id="resume-file" accept=".pdf,.doc,.docx,.txt" hidden>
+                        <button class="upload-btn" onclick="document.getElementById('resume-file').click()">
+                            Choose File
+                        </button>
+                    </div>
+                    <div class="document-info" id="resume-info" style="display: none;">
+                        <div class="doc-preview">
+                            <span class="doc-icon">📄</span>
+                            <div class="doc-details">
+                                <h4 id="resume-name">Resume.pdf</h4>
+                                <p id="resume-date">Last updated: Today</p>
+                            </div>
+                        </div>
+                        <button class="replace-btn" onclick="document.getElementById('resume-file').click()">
+                            Replace
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Portfolio</h3>
+                <div class="document-upload" id="portfolio-upload">
+                    <div class="upload-area">
+                        <span class="upload-icon">🎨</span>
+                        <p>Upload your portfolio</p>
+                        <input type="file" id="portfolio-file" accept=".pdf,.doc,.docx,.txt" hidden>
+                        <button class="upload-btn" onclick="document.getElementById('portfolio-file').click()">
+                            Choose File
+                        </button>
+                    </div>
+                    <div class="document-info" id="portfolio-info" style="display: none;">
+                        <div class="doc-preview">
+                            <span class="doc-icon">🎨</span>
+                            <div class="doc-details">
+                                <h4 id="portfolio-name">Portfolio.pdf</h4>
+                                <p id="portfolio-date">Last updated: Today</p>
+                            </div>
+                        </div>
+                        <button class="replace-btn" onclick="document.getElementById('portfolio-file').click()">
+                            Replace
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Skills & Experience</h3>
+                <div class="skills-section">
+                    <div class="skills-input">
+                        <input type="text" id="skill-input" placeholder="Add a skill (e.g., JavaScript, React)">
+                        <button id="add-skill-btn" class="add-btn">+</button>
+                    </div>
+                    <div class="skills-list" id="skills-list">
+                        <!-- Skills will be populated here -->
+                    </div>
+                </div>
+
+                <div class="experience-section">
+                    <h4>Work Experience</h4>
+                    <button id="add-experience-btn" class="add-experience-btn">+ Add Experience</button>
+                    <div class="experience-list" id="experience-list">
+                        <!-- Experience items will be populated here -->
+                    </div>
+                </div>
+
+                <div class="education-section">
+                    <h4>Education</h4>
+                    <button id="add-education-btn" class="add-education-btn">+ Add Education</button>
+                    <div class="education-list" id="education-list">
+                        <!-- Education items will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Analysis Tab -->
+        <div class="tab-content" id="analysis-tab">
+            <div class="section">
+                <h3>Recent Job Analysis</h3>
+                <div class="analysis-history" id="analysis-history">
+                    <!-- Analysis history will be populated here -->
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Tailored Resumes</h3>
+                <div class="tailored-resumes" id="tailored-resumes">
+                    <!-- Tailored resumes will be populated here -->
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Performance Insights</h3>
+                <div class="insights">
+                    <div class="insight-card">
+                        <h4>Average Match Rate</h4>
+                        <div class="insight-value" id="avg-match-rate">0%</div>
+                    </div>
+                    <div class="insight-card">
+                        <h4>Jobs Analyzed</h4>
+                        <div class="insight-value" id="jobs-analyzed">0</div>
+                    </div>
+                    <div class="insight-card">
+                        <h4>Resumes Generated</h4>
+                        <div class="insight-value" id="resumes-generated">0</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Tab -->
+        <div class="tab-content" id="settings-tab">
+            <div class="section">
+                <h3>Job Preferences</h3>
+                <div class="preference-group">
+                    <label for="target-roles">Target Roles</label>
+                    <input type="text" id="target-roles" placeholder="e.g., Software Engineer, Product Manager">
+                </div>
+                
+                <div class="preference-group">
+                    <label for="target-companies">Target Companies</label>
+                    <input type="text" id="target-companies" placeholder="e.g., Google, Microsoft, Apple">
+                </div>
+                
+                <div class="preference-group">
+                    <label for="salary-min">Salary Range</label>
+                    <div class="salary-range">
+                        <input type="number" id="salary-min" placeholder="Min">
+                        <span>to</span>
+                        <input type="number" id="salary-max" placeholder="Max">
+                    </div>
+                </div>
+                
+                <div class="preference-group">
+                    <label for="location">Preferred Location</label>
+                    <input type="text" id="location" placeholder="e.g., San Francisco, CA">
+                </div>
+                
+                <div class="preference-group">
+                    <label for="remote-preference">Remote Preference</label>
+                    <select id="remote-preference">
+                        <option value="any">Any</option>
+                        <option value="remote">Remote Only</option>
+                        <option value="hybrid">Hybrid</option>
+                        <option value="onsite">On-site Only</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>AI Settings</h3>
+                <div class="preference-group">
+                    <label for="ai-api-key">OpenAI API Key (Optional)</label>
+                    <input type="password" id="ai-api-key" placeholder="sk-...">
+                    <p class="help-text">For enhanced AI-powered resume generation and analysis</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Data Management</h3>
+                <div class="data-actions">
+                    <button id="export-data-btn" class="action-btn secondary">Export Data</button>
+                    <button id="import-data-btn" class="action-btn secondary">Import Data</button>
+                    <button id="clear-data-btn" class="action-btn danger">Clear All Data</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Job Application Assistant v1.0.0</p>
+            <button id="help-btn" class="help-btn">?</button>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div class="modal" id="experience-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add Work Experience</h3>
+                <button class="close-btn" onclick="closeModal('experience-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="exp-title">Job Title</label>
+                    <input type="text" id="exp-title" placeholder="e.g., Senior Software Engineer">
+                </div>
+                <div class="form-group">
+                    <label for="exp-company">Company</label>
+                    <input type="text" id="exp-company" placeholder="e.g., Google">
+                </div>
+                <div class="form-group">
+                    <label for="exp-duration">Duration</label>
+                    <input type="text" id="exp-duration" placeholder="e.g., 2020 - Present">
+                </div>
+                <div class="form-group">
+                    <label for="exp-description">Description</label>
+                    <textarea id="exp-description" placeholder="Describe your role and achievements"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn secondary" onclick="closeModal('experience-modal')">Cancel</button>
+                <button class="btn primary" onclick="saveExperience()">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="education-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add Education</h3>
+                <button class="close-btn" onclick="closeModal('education-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="edu-degree">Degree</label>
+                    <input type="text" id="edu-degree" placeholder="e.g., Bachelor of Science in Computer Science">
+                </div>
+                <div class="form-group">
+                    <label for="edu-school">School</label>
+                    <input type="text" id="edu-school" placeholder="e.g., Stanford University">
+                </div>
+                <div class="form-group">
+                    <label for="edu-year">Year</label>
+                    <input type="text" id="edu-year" placeholder="e.g., 2020">
+                </div>
+                <div class="form-group">
+                    <label for="edu-gpa">GPA (Optional)</label>
+                    <input type="text" id="edu-gpa" placeholder="e.g., 3.8">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn secondary" onclick="closeModal('education-modal')">Cancel</button>
+                <button class="btn primary" onclick="saveEducation()">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html> 

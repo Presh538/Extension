@@ -1,0 +1,52 @@
+JOHN DOE
+Software Engineer
+john.doe@email.com | (555) 123-4567 | linkedin.com/in/johndoe
+
+PROFESSIONAL SUMMARY
+Experienced software engineer with 5+ years developing web applications using modern technologies. Passionate about creating scalable solutions and mentoring junior developers.
+
+TECHNICAL SKILLS
+• Programming Languages: JavaScript, TypeScript, Python, Java, SQL
+• Frontend: React, Angular, Vue.js, HTML5, CSS3, Bootstrap
+• Backend: Node.js, Express, Django, Spring Boot
+• Databases: MongoDB, PostgreSQL, MySQL, Redis
+• Cloud & DevOps: AWS, Docker, Kubernetes, CI/CD, Git
+• Tools: VS Code, IntelliJ, Postman, Jira, Agile/Scrum
+
+WORK EXPERIENCE
+
+Senior Software Engineer | TechCorp Inc. | 2020 - Present
+• Led development of microservices architecture serving 1M+ users
+• Implemented CI/CD pipelines reducing deployment time by 60%
+• Mentored 3 junior developers and conducted code reviews
+• Technologies: React, Node.js, MongoDB, AWS, Docker
+
+Software Engineer | StartupXYZ | 2018 - 2020
+• Built RESTful APIs and frontend applications using React and Node.js
+• Collaborated with cross-functional teams in agile environment
+• Improved application performance by 40% through optimization
+• Technologies: JavaScript, React, Express, PostgreSQL
+
+Junior Developer | WebSolutions | 2016 - 2018
+• Developed responsive web applications and maintained existing codebase
+• Participated in daily standups and sprint planning
+• Fixed bugs and implemented new features based on requirements
+• Technologies: HTML, CSS, JavaScript, PHP, MySQL
+
+EDUCATION
+Bachelor of Science in Computer Science
+University of Technology | 2016
+GPA: 3.8/4.0
+
+PROJECTS
+• E-commerce Platform: Full-stack application with React, Node.js, MongoDB
+• Task Management App: Real-time collaboration tool using Socket.io
+• Weather Dashboard: React app consuming REST APIs with data visualization
+
+CERTIFICATIONS
+• AWS Certified Developer Associate
+• MongoDB Certified Developer
+• Agile Certified Practitioner (PMI-ACP)
+
+LANGUAGES
+English (Native), Spanish (Conversational) 

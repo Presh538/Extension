@@ -1,0 +1,363 @@
+/* Job Application Assistant Content Script Styles */
+
+.job-assistant-panel {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 400px;
+  max-height: 80vh;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  border: 1px solid #e1e5e9;
+  z-index: 10000;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.job-assistant-panel:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+.job-assistant-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 12px 12px 0 0;
+}
+
+.job-assistant-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.job-assistant-toggle {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.job-assistant-toggle:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.job-assistant-content {
+  padding: 20px;
+  max-height: calc(80vh - 60px);
+  overflow-y: auto;
+}
+
+.loading {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+}
+
+/* Analysis Section */
+.analysis-section {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e1e5e9;
+}
+
+.match-score {
+  flex-shrink: 0;
+}
+
+.score-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  position: relative;
+}
+
+.score-circle.excellent {
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+}
+
+.score-circle.good {
+  background: linear-gradient(135deg, #2196F3, #1976D2);
+}
+
+.score-circle.fair {
+  background: linear-gradient(135deg, #FF9800, #F57C00);
+}
+
+.score-circle.poor {
+  background: linear-gradient(135deg, #F44336, #D32F2F);
+}
+
+.score-number {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.score-label {
+  font-size: 10px;
+  opacity: 0.9;
+  margin-top: 2px;
+}
+
+.job-info h4 {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.job-info p {
+  margin: 4px 0;
+  font-size: 13px;
+  color: #666;
+}
+
+/* Skills Section */
+.skills-section {
+  margin-bottom: 20px;
+}
+
+.skills-section h4 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.skills-match {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.matched-skills h5,
+.missing-skills h5 {
+  margin: 0 0 8px 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #333;
+}
+
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.skill-tag {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 500;
+  border: 1px solid;
+}
+
+.skill-tag.matched {
+  background: #e8f5e8;
+  color: #2e7d32;
+  border-color: #4caf50;
+}
+
+.skill-tag.missing {
+  background: #ffebee;
+  color: #c62828;
+  border-color: #f44336;
+}
+
+/* Recommendations Section */
+.recommendations-section {
+  margin-bottom: 20px;
+}
+
+.recommendations-section h4 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.recommendations-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.recommendation {
+  padding: 12px;
+  border-radius: 8px;
+  border-left: 4px solid;
+}
+
+.recommendation.high {
+  background: #fff3e0;
+  border-left-color: #ff9800;
+}
+
+.recommendation.medium {
+  background: #e3f2fd;
+  border-left-color: #2196f3;
+}
+
+.recommendation.low {
+  background: #f3e5f5;
+  border-left-color: #9c27b0;
+}
+
+.recommendation h5 {
+  margin: 0 0 4px 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #333;
+}
+
+.recommendation p {
+  margin: 0;
+  font-size: 11px;
+  color: #666;
+  line-height: 1.4;
+}
+
+/* Actions Section */
+.actions-section {
+  display: flex;
+  gap: 8px;
+}
+
+.action-btn {
+  flex: 1;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.action-btn.primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.action-btn.primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.action-btn.secondary {
+  background: #f5f5f5;
+  color: #333;
+  border: 1px solid #ddd;
+}
+
+.action-btn.secondary:hover {
+  background: #e8e8e8;
+  border-color: #ccc;
+}
+
+/* Error Message */
+.error-message {
+  text-align: center;
+  color: #d32f2f;
+  padding: 20px;
+}
+
+.error-message p {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+}
+
+/* Notifications */
+.job-assistant-notification {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 20px;
+  border-radius: 8px;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  z-index: 10001;
+  animation: slideIn 0.3s ease;
+}
+
+.job-assistant-notification.success {
+  background: #4caf50;
+}
+
+.job-assistant-notification.error {
+  background: #f44336;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .job-assistant-panel {
+    width: calc(100vw - 40px);
+    right: 20px;
+    left: 20px;
+  }
+  
+  .analysis-section {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .actions-section {
+    flex-direction: column;
+  }
+}
+
+/* Scrollbar Styling */
+.job-assistant-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.job-assistant-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.job-assistant-content::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.job-assistant-content::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+} 

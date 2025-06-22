@@ -1,0 +1,67 @@
+{
+  "manifest_version": 3,
+  "name": "Job Application Assistant",
+  "version": "1.0.0",
+  "description": "AI-powered job application assistant that analyzes requirements and helps tailor your resume",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting",
+    "tabs"
+  ],
+  "host_permissions": [
+    "https://*.linkedin.com/*",
+    "https://*.indeed.com/*",
+    "https://*.glassdoor.com/*",
+    "https://*.monster.com/*",
+    "https://*.ziprecruiter.com/*",
+    "https://*.careerbuilder.com/*",
+    "https://*.simplyhired.com/*",
+    "https://*.dice.com/*",
+    "https://*.angel.co/*",
+    "https://*.stackoverflow.com/*",
+    "https://*.github.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.linkedin.com/jobs/*",
+        "https://*.indeed.com/viewjob*",
+        "https://*.glassdoor.com/Job/*",
+        "https://*.monster.com/job/*",
+        "https://*.ziprecruiter.com/c/*",
+        "https://*.careerbuilder.com/job/*",
+        "https://*.simplyhired.com/job/*",
+        "https://*.dice.com/job-detail/*",
+        "https://*.angel.co/jobs/*",
+        "https://*.stackoverflow.com/jobs/*",
+        "https://*.github.com/careers/*"
+      ],
+      "js": ["content.js"],
+      "css": ["content.css"]
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Job Application Assistant",
+    "default_icon": {
+      "16": "icons/icon.svg",
+      "48": "icons/icon.svg",
+      "128": "icons/icon.svg"
+    }
+  },
+  "icons": {
+    "16": "icons/icon.svg",
+    "48": "icons/icon.svg",
+    "128": "icons/icon.svg"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["popup.html", "popup.js", "popup.css"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+} 
