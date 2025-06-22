@@ -1,0 +1,36 @@
+{
+  "name": "job-application-assistant",
+  "version": "1.0.0",
+  "description": "AI-powered Chrome extension for job applications",
+  "main": "background.js",
+  "scripts": {
+    "dev": "node dev-reload.js",
+    "build": "zip -r job-application-assistant.zip . -x \"*.git*\" \"node_modules/*\" \"*.DS_Store\" \"package.json\" \"package-lock.json\" \"dev-reload.js\" \"dev-setup.md\"",
+    "test": "open -a \"Google Chrome\" \"file://$(pwd)/test-job-page.html\"",
+    "test-linkedin": "open -a \"Google Chrome\" \"https://www.linkedin.com/jobs/\"",
+    "test-indeed": "open -a \"Google Chrome\" \"https://www.indeed.com/\"",
+    "commit": "git add . && git commit -m \"$npm_config_message\" && git push",
+    "release": "npm run build && echo \"Extension packaged as job-application-assistant.zip\""
+  },
+  "keywords": [
+    "chrome-extension",
+    "job-application",
+    "ai",
+    "resume",
+    "career"
+  ],
+  "author": "Presh538",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Presh538/Extension.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Presh538/Extension/issues"
+  },
+  "homepage": "https://github.com/Presh538/Extension#readme",
+  "devDependencies": {},
+  "engines": {
+    "node": ">=14.0.0"
+  }
+} 
