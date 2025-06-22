@@ -25,13 +25,26 @@ class PopupManager {
       });
     });
 
-    // File uploads
+    // File uploads - Resume
     document.getElementById('resume-file').addEventListener('change', (e) => {
       this.handleFileUpload(e, 'resume');
     });
+    document.getElementById('resume-upload-btn').addEventListener('click', () => {
+      document.getElementById('resume-file').click();
+    });
+    document.getElementById('resume-replace-btn').addEventListener('click', () => {
+      document.getElementById('resume-file').click();
+    });
 
+    // File uploads - Portfolio
     document.getElementById('portfolio-file').addEventListener('change', (e) => {
       this.handleFileUpload(e, 'portfolio');
+    });
+    document.getElementById('portfolio-upload-btn').addEventListener('click', () => {
+      document.getElementById('portfolio-file').click();
+    });
+    document.getElementById('portfolio-replace-btn').addEventListener('click', () => {
+      document.getElementById('portfolio-file').click();
     });
 
     // Skills management
@@ -52,6 +65,28 @@ class PopupManager {
 
     document.getElementById('add-education-btn').addEventListener('click', () => {
       this.openModal('education-modal');
+    });
+
+    // Modal buttons - Experience
+    document.getElementById('experience-close-btn').addEventListener('click', () => {
+      this.closeModal('experience-modal');
+    });
+    document.getElementById('experience-cancel-btn').addEventListener('click', () => {
+      this.closeModal('experience-modal');
+    });
+    document.getElementById('experience-save-btn').addEventListener('click', () => {
+      this.saveExperience();
+    });
+
+    // Modal buttons - Education
+    document.getElementById('education-close-btn').addEventListener('click', () => {
+      this.closeModal('education-modal');
+    });
+    document.getElementById('education-cancel-btn').addEventListener('click', () => {
+      this.closeModal('education-modal');
+    });
+    document.getElementById('education-save-btn').addEventListener('click', () => {
+      this.saveEducation();
     });
 
     // Settings
@@ -638,19 +673,6 @@ class PopupManager {
     
     return date.toLocaleDateString();
   }
-}
-
-// Global functions for modal interactions
-function closeModal(modalId) {
-  popupManager.closeModal(modalId);
-}
-
-function saveExperience() {
-  popupManager.saveExperience();
-}
-
-function saveEducation() {
-  popupManager.saveEducation();
 }
 
 // Initialize popup when DOM is loaded

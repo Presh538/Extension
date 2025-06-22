@@ -36,7 +36,7 @@
                         <span class="upload-icon">📄</span>
                         <p>Upload your resume</p>
                         <input type="file" id="resume-file" accept=".pdf,.doc,.docx,.txt" hidden>
-                        <button class="upload-btn" onclick="document.getElementById('resume-file').click()">
+                        <button class="upload-btn" id="resume-upload-btn">
                             Choose File
                         </button>
                     </div>
@@ -48,7 +48,7 @@
                                 <p id="resume-date">Last updated: Today</p>
                             </div>
                         </div>
-                        <button class="replace-btn" onclick="document.getElementById('resume-file').click()">
+                        <button class="replace-btn" id="resume-replace-btn">
                             Replace
                         </button>
                     </div>
@@ -62,7 +62,7 @@
                         <span class="upload-icon">🎨</span>
                         <p>Upload your portfolio</p>
                         <input type="file" id="portfolio-file" accept=".pdf,.doc,.docx,.txt" hidden>
-                        <button class="upload-btn" onclick="document.getElementById('portfolio-file').click()">
+                        <button class="upload-btn" id="portfolio-upload-btn">
                             Choose File
                         </button>
                     </div>
@@ -74,7 +74,7 @@
                                 <p id="portfolio-date">Last updated: Today</p>
                             </div>
                         </div>
-                        <button class="replace-btn" onclick="document.getElementById('portfolio-file').click()">
+                        <button class="replace-btn" id="portfolio-replace-btn">
                             Replace
                         </button>
                     </div>
@@ -216,7 +216,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h3>Add Work Experience</h3>
-                <button class="close-btn" onclick="closeModal('experience-modal')">&times;</button>
+                <button class="close-btn" id="experience-close-btn">&times;</button>
             </div>
             <div class="modal-body">
                 <div class="form-group">
@@ -237,8 +237,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn secondary" onclick="closeModal('experience-modal')">Cancel</button>
-                <button class="btn primary" onclick="saveExperience()">Save</button>
+                <button class="btn secondary" id="experience-cancel-btn">Cancel</button>
+                <button class="btn primary" id="experience-save-btn">Save</button>
             </div>
         </div>
     </div>
@@ -247,7 +247,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h3>Add Education</h3>
-                <button class="close-btn" onclick="closeModal('education-modal')">&times;</button>
+                <button class="close-btn" id="education-close-btn">&times;</button>
             </div>
             <div class="modal-body">
                 <div class="form-group">
@@ -268,8 +268,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn secondary" onclick="closeModal('education-modal')">Cancel</button>
-                <button class="btn primary" onclick="saveEducation()">Save</button>
+                <button class="btn secondary" id="education-cancel-btn">Cancel</button>
+                <button class="btn primary" id="education-save-btn">Save</button>
             </div>
         </div>
     </div>
