@@ -29,8 +29,10 @@
     "url": "https://github.com/Presh538/Extension/issues"
   },
   "homepage": "https://github.com/Presh538/Extension#readme",
-  "devDependencies": {},
   "engines": {
     "node": ">=14.0.0"
+  },
+  "dependencies": {
+    "pdfjs-dist": "^5.3.31"
   }
-} 
+}

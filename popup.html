@@ -5,9 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job Application Assistant</title>
     <link rel="stylesheet" href="popup.css">
+    <script src="libs/pdf.js"></script>
 </head>
 <body>
-    <div class="popup-container">
+    <div id="welcome-screen" style="display: none;">
+      <div class="welcome-container">
+        <span class="welcome-icon">👋</span>
+        <h2>Welcome to your Job Assistant</h2>
+        <p>Get started by uploading your resume. We'll analyze it to help you find the perfect job match.</p>
+        
+        <div class="upload-box" id="welcome-upload-box">
+          <div class="upload-content" id="upload-content">
+            <div class="upload-icon" id="upload-icon">📄</div>
+            <p class="upload-text" id="upload-text">Drag & drop your resume here</p>
+            <span class="upload-or">or</span>
+            <button class="upload-btn primary" id="welcome-upload-btn">
+              Choose File
+            </button>
+          </div>
+          
+          <div class="upload-progress" id="upload-progress" style="display: none;">
+            <div class="progress-circle">
+              <svg class="progress-ring" width="60" height="60">
+                <circle class="progress-ring-circle" stroke="#667eea" stroke-width="4" fill="transparent" r="26" cx="30" cy="30"/>
+              </svg>
+              <div class="progress-text" id="progress-text">0%</div>
+            </div>
+            <p class="uploading-text">Uploading your resume...</p>
+          </div>
+          
+          <div class="upload-success" id="upload-success" style="display: none;">
+            <div class="success-icon">✅</div>
+            <p class="success-text">Resume uploaded successfully!</p>
+            <p class="file-name" id="uploaded-file-name"></p>
+          </div>
+        </div>
+        
+        <p class="privacy-note">Your data is stored locally and never shared.</p>
+      </div>
+    </div>
+
+    <div id="main-content" class="popup-container" style="display: none;">
         <!-- Header -->
         <div class="header">
             <div class="logo">
@@ -31,28 +69,38 @@
         <div class="tab-content active" id="documents-tab">
             <div class="section">
                 <h3>Resume</h3>
-                <div class="document-upload" id="resume-upload">
-                    <div class="upload-area">
-                        <span class="upload-icon">📄</span>
-                        <p>Upload your resume</p>
-                        <input type="file" id="resume-file" accept=".pdf,.doc,.docx,.txt" hidden>
-                        <button class="upload-btn" id="resume-upload-btn">
+                <div class="upload-box" id="resume-upload-box">
+                    <div class="upload-content" id="resume-upload-content">
+                        <div class="upload-icon" id="resume-upload-icon">📄</div>
+                        <p class="upload-text" id="resume-upload-text">Upload your resume</p>
+                        <span class="upload-or">or</span>
+                        <button class="upload-btn primary" id="resume-upload-btn">
                             Choose File
                         </button>
                     </div>
-                    <div class="document-info" id="resume-info" style="display: none;">
-                        <div class="doc-preview">
-                            <span class="doc-icon">📄</span>
-                            <div class="doc-details">
-                                <h4 id="resume-name">Resume.pdf</h4>
-                                <p id="resume-date">Last updated: Today</p>
-                            </div>
+                    
+                    <div class="upload-progress" id="resume-upload-progress" style="display: none;">
+                        <div class="progress-circle">
+                            <svg class="progress-ring" width="60" height="60">
+                                <circle class="progress-ring-circle" stroke="#667eea" stroke-width="4" fill="transparent" r="26" cx="30" cy="30"/>
+                            </svg>
+                            <div class="progress-text" id="resume-progress-text">0%</div>
                         </div>
-                        <button class="replace-btn" id="resume-replace-btn">
-                            Replace
-                        </button>
+                        <p class="uploading-text">Uploading your resume...</p>
+                    </div>
+                    
+                    <div class="upload-success" id="resume-upload-success" style="display: none;">
+                        <div class="success-icon">✅</div>
+                        <p class="success-text">Resume uploaded successfully!</p>
+                        <p class="file-name" id="resume-file-name"></p>
+                        <div class="file-actions">
+                            <button class="action-btn secondary" id="change-file-btn">Change File</button>
+                            <button class="action-btn danger" id="delete-file-btn">Delete</button>
+                        </div>
                     </div>
                 </div>
+                <input type="file" id="resume-upload" accept=".txt,.pdf,.doc,.docx" hidden>
+                <div id="resume-history-section" class="resume-history-section"></div>
             </div>
 
             <div class="section">
@@ -109,8 +157,55 @@
         <!-- Analysis Tab -->
         <div class="tab-content" id="analysis-tab">
             <div class="section">
+                <h3>Profile Completeness</h3>
+                <div class="profile-completeness">
+                    <div class="completeness-item">
+                        <div class="completeness-circle">
+                            <svg class="completeness-ring" width="60" height="60">
+                                <circle class="completeness-ring-bg" stroke="#e9ecef" stroke-width="4" fill="transparent" r="26" cx="30" cy="30"/>
+                                <circle class="completeness-ring-progress" stroke="#667eea" stroke-width="4" fill="transparent" r="26" cx="30" cy="30"/>
+                            </svg>
+                            <div class="completeness-text" id="resume-completeness">0%</div>
+                        </div>
+                        <div class="completeness-label">
+                            <h4>Resume</h4>
+                            <p>Upload your resume to get started</p>
+                        </div>
+                    </div>
+                    
+                    <div class="completeness-item">
+                        <div class="completeness-circle">
+                            <svg class="completeness-ring" width="60" height="60">
+                                <circle class="completeness-ring-bg" stroke="#e9ecef" stroke-width="4" fill="transparent" r="26" cx="30" cy="30"/>
+                                <circle class="completeness-ring-progress" stroke="#28a745" stroke-width="4" fill="transparent" r="26" cx="30" cy="30"/>
+                            </svg>
+                            <div class="completeness-text" id="skills-completeness">0%</div>
+                        </div>
+                        <div class="completeness-label">
+                            <h4>Skills</h4>
+                            <p>Add your key skills and expertise</p>
+                        </div>
+                    </div>
+                    
+                    <div class="completeness-item">
+                        <div class="completeness-circle">
+                            <svg class="completeness-ring" width="60" height="60">
+                                <circle class="completeness-ring-bg" stroke="#e9ecef" stroke-width="4" fill="transparent" r="26" cx="30" cy="30"/>
+                                <circle class="completeness-ring-progress" stroke="#ffc107" stroke-width="4" fill="transparent" r="26" cx="30" cy="30"/>
+                            </svg>
+                            <div class="completeness-text" id="experience-completeness">0%</div>
+                        </div>
+                        <div class="completeness-label">
+                            <h4>Experience</h4>
+                            <p>Add your work experience</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
                 <h3>Recent Job Analysis</h3>
-                <div class="analysis-history" id="analysis-history">
+                <div class="analysis-list" id="analysis-list">
                     <!-- Analysis history will be populated here -->
                 </div>
             </div>
@@ -183,8 +278,8 @@
             <div class="section">
                 <h3>AI Settings</h3>
                 <div class="preference-group">
-                    <label for="ai-api-key">OpenAI API Key (Optional)</label>
-                    <input type="password" id="ai-api-key" placeholder="sk-...">
+                    <label for="api-key">OpenAI API Key (Optional)</label>
+                    <input type="password" id="api-key" placeholder="sk-...">
                     <p class="help-text">For enhanced AI-powered resume generation and analysis</p>
                 </div>
             </div>
@@ -251,11 +346,11 @@
                 </div>
                 <div class="form-group">
                     <label for="edu-school">School</label>
-                    <input type="text" id="edu-school" placeholder="e.g., Stanford University">
+                    <input type="text" id="edu-school" placeholder="e.g., University of California, Berkeley">
                 </div>
                 <div class="form-group">
                     <label for="edu-year">Year</label>
-                    <input type="text" id="edu-year" placeholder="e.g., 2020">
+                    <input type="text" id="edu-year" placeholder="e.g., 2016 - 2020">
                 </div>
                 <div class="form-group">
                     <label for="edu-gpa">GPA (Optional)</label>
@@ -267,6 +362,18 @@
                 <button class="btn primary" id="education-save-btn">Save</button>
             </div>
         </div>
+    </div>
+
+    <div id="history-modal" class="modal" style="display:none;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id="modal-title">History Item</h2>
+          <span class="close-button">&times;</span>
+        </div>
+        <div class="modal-body">
+          <pre id="modal-text-content"></pre>
+        </div>
+      </div>
     </div>
 
     <script src="popup.js"></script>
